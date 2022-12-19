@@ -1,0 +1,1 @@
+dokku proxy:ports-add app_name http:80:80

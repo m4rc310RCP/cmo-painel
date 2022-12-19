@@ -1,0 +1,6 @@
+ <websocket:message-broker application-destination-prefix="/app">  
+    <websocket:stomp-endpoint path="/hello">                         
+        <websocket:sockjs/>                                       
+    </websocket:stomp-endpoint>                                   
+    <websocket:simple-broker prefix="/topic"/>                    
+</websocket:message-broker>

@@ -1,0 +1,23 @@
+# FROM openjdk:8-jdk-alpine
+# RUN addgroup -S spring && adduser -S spring -G spring
+# USER spring:spring
+
+# COPY .mvn/ .mvn
+# COPY mvnw pom.xml ./
+# RUN ./mvnw dependency:resolve
+
+# COPY src ./src
+
+# CMD ["./mvnw", "spring-boot:run"]
+
+
+
+FROM maven:3.8-jdk-8 AS build
+COPY . /usr/app
+WORKDIR /usr/app
+RUN mvn clean package
+
+FROM openjdk:8-alpine
+COPY --from=build /usr/app/target/*-exec.jar /usr/app/myapp.jar
+EXPOSE 5000
+ENTRYPOINT ["java","-jar","/usr/app/myapp.jar"]
